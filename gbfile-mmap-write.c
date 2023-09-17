@@ -46,6 +46,7 @@ int main()
         char index=(char) i&0xff; //changing index to 1 byte
         blockptr[0]= index;
         
+        
     }
     munmap(memptr,filesize);
     close(fd);

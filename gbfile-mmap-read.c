@@ -47,9 +47,19 @@ int main()
         read_index= *((int *) (&blockptr[32]));
         if(read_index!=i)
         {
-            printf("Index not read correctly. Read index: %d, index: %d \n",read_index,i);
+            printf("Index at 32nd location not read correctly. Read index: %d, index: %d \n",read_index,i);
         }
-        
+        char read_byte=blockptr[0];
+        char modulo_idx=(char)(i&0xff);
+        if(read_byte!= modulo_idx)
+        {
+            printf("Index at 0th location not read correctly. Read index: 0x %x, index: 0x%x \n",read_byte,modulo_idx);
+        }
+        /*else
+        {
+            printf("Index at 0th location read correctly . Read index: 0x%x, index: 0x%x \n",read_byte,modulo_idx);
+        }
+        */
     }
     munmap(memptr,filesize);
     close(fd);
