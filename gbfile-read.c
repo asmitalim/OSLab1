@@ -6,6 +6,7 @@
 #include <ctype.h>
 #include <string.h>
 #include <unistd.h>
+#include "gbfile.h"
 
 char buf [4096];
 int main()
