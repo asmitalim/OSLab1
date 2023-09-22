@@ -9,11 +9,26 @@
 #include "gbfile.h"
 
 char buf [4096];
-int main()
+int main(int argc, char** argv)
 {   
     int count=0;
     FILE* fd;
-	fd=fopen("./gb1.bin", "rb");
+    char inputfile[100];
+    char* defaultfilename="./gbdir/gb1.bin";
+    if(argc==1)
+    {   
+        sprintf(inputfile, "%s", defaultfilename);
+    }
+    else if(argc==2)
+    {
+        sprintf(inputfile, "%s", argv[1]);
+    }
+    else
+    {
+        printf("Error: Please input only 0 or 1 argument corresponding to the input file to read");
+        exit(1);
+    }
+	fd=fopen(inputfile, "rb");
     if(fd==NULL)
     {
         perror("Fopen");
@@ -38,6 +53,7 @@ int main()
             if(len_read==4096)
             {   
                 read_index= *((int *) (&buf[32]));
+                /*
                 for(int j=32;j<36;j++)
                 {
                     if(j%8==0)
@@ -57,14 +73,15 @@ int main()
                     exit(-1);
                 }
                 else 
-                {
+                {   
                     printf("File read correctly! \n");
                     printf("Index is %d \n", i);
                     printf("Read index is %d \n", read_index);
-
+                    
                 }
                 
-               //printf("Char is %x \n", *((unsigned char*)check));
+               printf("Char is %x \n", *((unsigned char*)check));
+               */
 
             }
         }
@@ -85,7 +102,7 @@ int main()
         }
 
     }
-    printf("Count of pages read %d \n", count);
+    //printf("Count of pages read %d \n", count);
 	fclose(fd);
 }
 	

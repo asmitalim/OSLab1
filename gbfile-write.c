@@ -13,7 +13,7 @@ int main()
 {   
     int count=0;
     FILE* fp;
-	fp=fopen("./gb1.bin", "rb+");
+	fp=fopen("./gbdir/gb1.bin", "rb+");
     if(fp==NULL)
     {
         perror("Fopen");
@@ -80,7 +80,7 @@ int main()
         }
 
     }
-    printf("Count of pages read %d \n", count);
+    //printf("Count of pages read %d \n", count);
 	fclose(fp);
 }
 	

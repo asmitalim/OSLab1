@@ -11,7 +11,7 @@
 char* globalptr=NULL;
 int main()
 {
-	int fd=open("./gb1.bin", O_RDWR);
+	int fd=open("./gbdir/gb1.bin", O_RDWR);
 	if (fd==-1){
 		perror("open");
 		exit(-1);

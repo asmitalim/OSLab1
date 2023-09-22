@@ -5,13 +5,14 @@
 #include <fcntl.h>
 #include <unistd.h> 
 #include <ctype.h>
+#include <sys/resource.h>
 #include "gbfile.h"
 
 
 char* globalptr=NULL;
 int main()
-{
-	int fd=open("./gb1.bin", O_RDWR);
+{	
+	int fd=open("./gbdir/gb1.bin", O_RDWR);
 	if (fd==-1){
 		perror("open");
 		exit(-1);
@@ -48,6 +49,23 @@ int main()
         
         
     }
-    munmap(memptr,filesize);
-    close(fd);
+	int ret=msync(memptr, filesize, MS_SYNC);
+    if (ret==-1)
+    {
+        perror("Msync!");
+        exit(-1);
+    }
+    ret=munmap(memptr,filesize);
+    if (ret==-1)
+    {
+        perror("Munmap!");
+        exit(-1);
+    }
+    ret=close(fd);
+    if (ret==-1)
+    {
+        perror("Closing file!");
+        exit(-1);
+    }
+
 }
