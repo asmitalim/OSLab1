@@ -7,23 +7,23 @@ gb1:
 gb1clean:
 	rm -f gbdir/gb1.bin
 
-gbfile-write: gbfile-write.o
-	gcc -o gbfile-write gbfile-write.o
+gbfile-write: gbfile-write.o assigncpu.o
+	gcc -o gbfile-write gbfile-write.o assigncpu.o
 
-gbfile-read: gbfile-read.o
-	gcc -o gbfile-read gbfile-read.o
+gbfile-read: gbfile-read.o assigncpu.o
+	gcc -o gbfile-read gbfile-read.o assigncpu.o
 
-gbfile-mmap-read : gbfile-mmap-read.o
-	gcc -o gbfile-mmap-read gbfile-mmap-read.o
+gbfile-mmap-read : gbfile-mmap-read.o assigncpu.o
+	gcc -o gbfile-mmap-read gbfile-mmap-read.o assigncpu.o
 
-gbfile-mmap-write : gbfile-mmap-write.o
-	gcc -o gbfile-mmap-write gbfile-mmap-write.o
+gbfile-mmap-write : gbfile-mmap-write.o assigncpu.o
+	gcc -o gbfile-mmap-write gbfile-mmap-write.o assigncpu.o
 
-gbfile-mmap-random-write : gbfile-mmap-random-write.o
-	gcc -o gbfile-mmap-random-write gbfile-mmap-random-write.o
+gbfile-mmap-random-write : gbfile-mmap-random-write.o assigncpu.o
+	gcc -o gbfile-mmap-random-write gbfile-mmap-random-write.o assigncpu.o
 
-inputoutput: inputoutput.o
-	gcc -o inputoutput inputoutput.o
+inputoutput: inputoutput.o assigncpu.o
+	gcc -o inputoutput inputoutput.o assigncpu.o
 
 .c.o:
 	gcc -c -D_GNU_SOURCE $<
@@ -44,4 +44,5 @@ clean:
 	rm -rf gbfile-mmap-write
 	rm -rf gbfile-mmap-random-write
 	rm -rf inputoutput
+	rm -rf assigncpu
 
