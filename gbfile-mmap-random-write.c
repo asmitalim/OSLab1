@@ -23,7 +23,9 @@ void shuffle(int array[], int n)
     }
 }
 int main(int argc, char** argv)
-{
+{   
+    int cpu;
+    cpu=assigncpu();
     int who = RUSAGE_SELF;
     struct rusage ruse;
     int priv = 0;
@@ -163,7 +165,7 @@ int main(int argc, char** argv)
     
     if(headerinfo==1)
     {
-        printf("PrivateOrNot,AnonymousOrNot,TotalTime,Usertime,Systime,Maxrss,Minfaults,Majfaults,Inblock,Outblock,VolCSW,InvolCSV,Filesize\n");
+        printf("PrivateOrNot,AnonymousOrNot,TotalTime,Usertime,Systime,Maxrss,Minfaults,Majfaults,Inblock,Outblock,VolCSW,InvolCSV,Filesize,ProcessorCore\n");
     }
-    printf("%s,%s,%6.3lf,%6.3lf,%6.3lf,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld\n",map_buf, file_buf, usec1+ssec1, usec1,ssec1,ruse.ru_maxrss, ruse.ru_minflt, ruse.ru_majflt, ruse.ru_inblock, ruse.ru_oublock, ruse.ru_nvcsw, ruse.ru_nivcsw, filesize);
+    printf("%s,%s,%6.3lf,%6.3lf,%6.3lf,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%d\n",map_buf, file_buf, usec1+ssec1, usec1,ssec1,ruse.ru_maxrss, ruse.ru_minflt, ruse.ru_majflt, ruse.ru_inblock, ruse.ru_oublock, ruse.ru_nvcsw, ruse.ru_nivcsw, filesize, cpu);
 }

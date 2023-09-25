@@ -12,6 +12,8 @@
 char* globalptr=NULL;
 int main()
 {	
+    int cpu;
+    cpu=assigncpu();
 	int fd=open("./gbdir/gb1.bin", O_RDWR);
 	if (fd==-1){
 		perror("open");

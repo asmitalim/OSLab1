@@ -47,6 +47,8 @@ void do_file_io(int fd, char *buf,
 }
 int main(int argc, char** argv)
 {   
+    int cpu;
+    cpu=assigncpu();
     int who = RUSAGE_SELF;
     struct rusage ruse;
     int seq_flag=0;
@@ -136,7 +138,7 @@ int main(int argc, char** argv)
     
     if(headerinfo==1)
     {
-        printf("ReadOrWrite,SequentialOrRandom,TotalTime,Usertime,Systime,Maxrss,Minfaults,Majfaults,Inblock,Outblock,VolCSW,InvolCSV,Filesize\n");
+        printf("ReadOrWrite,SequentialOrRandom,TotalTime,Usertime,Systime,Maxrss,Minfaults,Majfaults,Inblock,Outblock,VolCSW,InvolCSV,Filesize,ProcessorCore\n");
     }
-    printf("%s,%s,%6.3lf,%6.3lf,%6.3lf,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld\n",rw_buf, seqran_buf, usec1+ssec1, usec1,ssec1,ruse.ru_maxrss, ruse.ru_minflt, ruse.ru_majflt, ruse.ru_inblock, ruse.ru_oublock, ruse.ru_nvcsw, ruse.ru_nivcsw, filesize);
+    printf("%s,%s,%6.3lf,%6.3lf,%6.3lf,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%ld,%d\n",rw_buf, seqran_buf, usec1+ssec1, usec1,ssec1,ruse.ru_maxrss, ruse.ru_minflt, ruse.ru_majflt, ruse.ru_inblock, ruse.ru_oublock, ruse.ru_nvcsw, ruse.ru_nivcsw, filesize,cpu);
 }
